@@ -16,12 +16,15 @@ class RepositoryTests(unittest.TestCase):
         hermes = (ROOT / 'runtimes/hermes-frontmatter.yaml').read_text()
         self.assertIn('name: research-to-action\n', hermes)
         self.assertIn(f'version: {version}\n', hermes)
-    def test_template_references_canonical_repository(self):
-        derive = (ROOT / 'DERIVE.md').read_text()
-        overlay = (ROOT / 'scripts/apply-to-template.py').read_text()
-        self.assertIn('ryanraposo/r2a', derive)
-        self.assertIn("default='ryanraposo/r2a'", overlay)
-        self.assertIn("'--name', 'research-to-action'", overlay)
+    def test_standalone_repository_identity(self):
+        readme = (ROOT / 'README.md').read_text()
+        self.assertIn('ryanraposo/r2a', readme)
+        self.assertIn('scripts/r2actl.py', readme)
+        for path in ('README.md', 'SKILL.md', 'AGENTS.md'):
+            self.assertNotIn('skill' + '-template', (ROOT / path).read_text())
+        for retired in ('DERIVE.md', 'scripts/apply-to-template.py', 'scripts/build-repo.py'):
+            self.assertFalse((ROOT / retired).exists())
+
     def test_schema_and_example_match_version(self):
         schema = json.loads((ROOT / 'schemas/dossier.schema.json').read_text())
         example = json.loads((ROOT / 'templates/brief.json').read_text())
