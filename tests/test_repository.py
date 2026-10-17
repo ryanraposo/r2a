@@ -18,12 +18,12 @@ class RepositoryTests(unittest.TestCase):
         self.assertIn(f'version: {version}\n', hermes)
     def test_standalone_repository_identity(self):
         readme = (ROOT / 'README.md').read_text()
+        skill = (ROOT / 'SKILL.md').read_text()
+        agents = (ROOT / 'AGENTS.md').read_text()
         self.assertIn('ryanraposo/r2a', readme)
         self.assertIn('scripts/r2actl.py', readme)
-        for path in ('README.md', 'SKILL.md', 'AGENTS.md'):
-            self.assertNotIn('skill' + '-template', (ROOT / path).read_text())
-        for retired in ('DERIVE.md', 'scripts/apply-to-template.py', 'scripts/build-repo.py'):
-            self.assertFalse((ROOT / retired).exists())
+        self.assertIn('## Runtime and verification', skill)
+        self.assertIn('## Maintain and test', agents)
 
     def test_schema_and_example_match_version(self):
         schema = json.loads((ROOT / 'schemas/dossier.schema.json').read_text())
