@@ -84,8 +84,8 @@ python3 scripts/r2actl.py handoff --input dossier.json --hours 1 --output execut
 
 `validate` enforces structure, internal references and supported verified claims; it is not an internet fact checker. `audit` reports research readiness and missing requirements; `handoff` prominently includes unresolved gaps unless `--require-ready` is set. Respect actual tools instead of claiming scripts were run when they were not.
 
-## Runtime / skill-template discipline
+## Runtime and verification
 
-In a repository derived from `ryanraposo/skill-template`, the **parent's** `contracts/skill-ux.json` and `scripts/skill-uxctl.py` own workflow phase transitions, approvals and completion receipts. Invoke and respect their actual installed interfaces. `r2actl.py` implements only the research domain contract. In ChatGPT or another skills-only environment without the controller, use the same explicit research stages and outputs, disclose that transactional/controller guarantees are unavailable, and avoid claiming they were enforced. See `DERIVE.md` for source-derived deployment.
+R2A is a portable skill. The `scripts/r2actl.py` commands validate dossier structure, audit evidence readiness, and generate executor handoffs. They do not verify external facts or grant permission for downstream execution. Use the invoking agent's available tools, actual permission model, and observed results to establish runtime capabilities and action receipts. Report any unavailable verification and preserve explicit stages and outputs across skill-capable environments.
 
-**Loom** is the named little investigator. Preserve its compact graphic-only figure in README and any template-derived public/installer surfaces. Its success pose belongs after verified installation, not before.
+**Loom** is R2A's named little investigator. Preserve the compact, graphic-only figure in the README and public skill surfaces.
