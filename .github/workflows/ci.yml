@@ -1,0 +1,20 @@
+name: R2A skill checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit and repository tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Validate starter dossier
+        run: python3 scripts/r2actl.py validate --input templates/brief.json
+      - name: Audit starter dossier (intentional needs-research status)
+        run: python3 scripts/r2actl.py audit --input templates/brief.json

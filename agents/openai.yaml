@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research to Action"
+  short_description: "Five researched pillars to executable intelligence"
+  default_prompt: "Use Research to Action to investigate this objective through five pillars, validate coverage and evidence, then prepare a specific time-budgeted agent mission to carry out the researched task."
+policy:
+  allow_implicit_invocation: true

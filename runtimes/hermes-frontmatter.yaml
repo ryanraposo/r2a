@@ -1,0 +1,15 @@
+---
+name: research-to-action
+description: >-
+  Research to Action performs five-pillar investigation: discover how to find,
+  map candidates, resolve action paths, test independent real-world evidence,
+  and prepare a verifiable, time-budgeted agent execution mission.
+version: 0.2.0
+author: Ryan Raposo
+license: MIT
+platforms: [linux, macos]
+metadata:
+  hermes:
+    tags: [research, deep-research, evidence, discovery, diligence, agentic-execution, handoff]
+    category: productivity
+---

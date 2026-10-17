@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research to Action dossier (v1, extended)",
+  "description": "Research facts and action plans. Structural validation does not establish external truth or execution readiness.",
+  "type": "object",
+  "required": ["schema_version", "project", "domain", "execution_goal", "execution_hours", "candidates", "evidence", "process_record"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "project": {"$ref": "#/$defs/text"},
+    "domain": {"$ref": "#/$defs/text"},
+    "execution_goal": {"$ref": "#/$defs/text"},
+    "context_and_constraints": {"type": "string"},
+    "execution_hours": {"type": "number", "exclusiveMinimum": 0, "maximum": 1000},
+    "authorized_actions": {"$ref": "#/$defs/textArray"},
+    "approval_gates": {"$ref": "#/$defs/textArray"},
+    "success_metrics": {"$ref": "#/$defs/textArray"},
+    "discovery": {
+      "type": "object",
+      "properties": {
+        "eligibility_criteria": {"$ref": "#/$defs/textArray"},
+        "methods": {"type": "array", "items": {"type": "object", "required": ["method", "tested", "new_relevant_count"], "properties": {
+          "method": {"$ref": "#/$defs/text"}, "query_or_procedure": {"type": "string"}, "source_class": {"type": "string"},
+          "tested": {"type": "boolean"}, "new_relevant_count": {"type": "integer", "minimum": 0},
+          "duplicate_count": {"type": "integer", "minimum": 0}, "blindspots": {"$ref": "#/$defs/textArray"},
+          "checked_at": {"type": "string"}
+        }}},
+        "coverage": {"type": "array", "items": {"type": "object", "required": ["category", "checked", "stop_reason"], "properties": {
+          "category": {"$ref": "#/$defs/text"}, "checked": {"type": "integer", "minimum": 0},
+          "stop_reason": {"$ref": "#/$defs/text"}, "known_gaps": {"$ref": "#/$defs/textArray"}
+        }}},
+        "search_playbook": {"$ref": "#/$defs/textArray"},
+        "rejected_categories": {"$ref": "#/$defs/textArray"},
+        "saturation_rationale": {"type": "string"}
+      }
+    },
+    "candidates": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/candidate"}},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "execution_plan": {"type": "object", "properties": {
+      "environment": {"type": "string"},
+      "tool_matrix": {"type": "array", "items": {"type": "object", "required": ["action", "tool", "availability"], "properties": {
+        "action": {"$ref": "#/$defs/text"}, "tool": {"$ref": "#/$defs/text"},
+        "availability": {"enum": ["exercised", "documented", "unknown", "unavailable"]},
+        "permissions": {"type": "string"}, "preflight": {"type": "string"}, "proof": {"type": "string"},
+        "fallback": {"type": "string"}
+      }}},
+      "sequence_rationale": {"type": "string"},
+      "checkpoints": {"$ref": "#/$defs/textArray"},
+      "recovery": {"type": "string"},
+      "budget_notes": {"type": "string"}
+    }},
+    "process_record": {"type": "object", "required": ["sources_checked", "comparisons", "decisions", "uncertainties", "improvements"], "properties": {
+      "sources_checked": {"$ref": "#/$defs/textArray"},
+      "comparisons": {"$ref": "#/$defs/textArray"},
+      "decisions": {"$ref": "#/$defs/textArray"},
+      "uncertainties": {"$ref": "#/$defs/textArray"},
+      "improvements": {"$ref": "#/$defs/textArray"}
+    }}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "textArray": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+    "step": {"type": "object", "required": ["action", "status", "evidence_ids"], "properties": {
+      "action": {"$ref": "#/$defs/text"},
+      "status": {"enum": ["verified", "inferred", "unconfirmed", "contradicted"]},
+      "evidence_ids": {"$ref": "#/$defs/textArray"},
+      "approval_required": {"type": "boolean"},
+      "expected_result": {"type": "string"},
+      "fallback": {"type": "string"}
+    }},
+    "candidate": {
+      "type": "object", "required": ["id", "name", "priority", "status", "operational_steps", "evidence_ids"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"}, "name": {"$ref": "#/$defs/text"},
+        "priority": {"type": "integer", "minimum": 1},
+        "status": {"enum": ["discovered", "verified", "conditional", "unconfirmed", "rejected"]},
+        "eligibility": {"type": "string"},
+        "target_outcome": {"type": "string"},
+        "rationale": {"type": "string"},
+        "verified_entry_point": {"type": ["string", "null"]},
+        "entry_evidence_ids": {"$ref": "#/$defs/textArray"},
+        "estimated_minutes": {"type": "number", "exclusiveMinimum": 0, "maximum": 1000},
+        "operational_steps": {"type": "array", "items": {"$ref": "#/$defs/step"}},
+        "blocking_conditions": {"$ref": "#/$defs/textArray"},
+        "success_evidence": {"$ref": "#/$defs/textArray"},
+        "recheck_triggers": {"$ref": "#/$defs/textArray"},
+        "independent_evidence_ids": {"$ref": "#/$defs/textArray"},
+        "independent_search_note": {"type": "string"},
+        "evidence_ids": {"$ref": "#/$defs/textArray"}
+      },
+      "allOf": [{"if": {"properties": {"status": {"const": "verified"}}, "required": ["status"]}, "then": {
+        "required": ["verified_entry_point", "entry_evidence_ids"],
+        "properties": {"verified_entry_point": {"$ref": "#/$defs/text"}, "entry_evidence_ids": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/text"}}
+      }}}]
+    },
+    "evidence": {
+      "type": "object", "required": ["id", "candidate_id", "claim", "url_or_locator", "checked_at", "evidence_grade"],
+      "properties": {
+        "id": {"$ref": "#/$defs/text"}, "candidate_id": {"type": ["string", "null"]},
+        "claim": {"$ref": "#/$defs/text"}, "url_or_locator": {"$ref": "#/$defs/text"},
+        "source_type": {"type": "string"}, "author_or_owner": {"type": "string"},
+        "publication_date": {"type": "string"}, "checked_at": {"$ref": "#/$defs/text"},
+        "access_method": {"type": "string"},
+        "evidence_grade": {"enum": ["verified", "inferred", "unconfirmed", "contradicted"]},
+        "quote_or_summary": {"type": "string"}, "limitations": {"type": "string"},
+        "independent": {"type": "boolean"}
+      }
+    }
+  }
+}

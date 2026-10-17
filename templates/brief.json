@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "project": "Illustrative research mission — replace before use",
+  "domain": "Any domain; examples here are placeholders, not evidence",
+  "execution_goal": "Achieve the user's measurable outcome through authorized actions",
+  "context_and_constraints": "Record location/jurisdiction, outcome, resources, permissions, and user preferences",
+  "execution_hours": 1,
+  "authorized_actions": ["Review public sources", "Prepare local drafts"],
+  "approval_gates": ["External submissions", "Public disclosure", "Payments", "Identity attestations"],
+  "success_metrics": ["Verified progress recorded with specific supporting receipt or blocker"],
+  "discovery": {
+    "eligibility_criteria": ["Relevant to the requested outcome"],
+    "search_playbook": [],
+    "methods": [],
+    "coverage": [],
+    "rejected_categories": [],
+    "saturation_rationale": "Not yet researched"
+  },
+  "candidates": [
+    {
+      "id": "example-1", "name": "Placeholder target — replace with an actual researched object", "priority": 1,
+      "status": "unconfirmed", "eligibility": "Pending evidence", "target_outcome": "Pending",
+      "rationale": "Placeholder only", "verified_entry_point": null, "entry_evidence_ids": [],
+      "estimated_minutes": 15,
+      "operational_steps": [{"action": "Locate an official entry point", "status": "unconfirmed", "evidence_ids": [], "approval_required": false, "expected_result": "A verified starting URL, file, interface or procedure"}],
+      "blocking_conditions": ["No verified entry point"],
+      "success_evidence": ["Observe the requested downstream result at its destination"],
+      "recheck_triggers": ["Before performing an externally consequential action"],
+      "independent_evidence_ids": [], "independent_search_note": "Not yet searched",
+      "evidence_ids": []
+    }
+  ],
+  "evidence": [],
+  "execution_plan": {
+    "environment": "Unknown: verify on executor invocation",
+    "tool_matrix": [], "sequence_rationale": "Unresearched", "checkpoints": [], "recovery": "Save evidence and current target state",
+    "budget_notes": "Time belongs to future execution, not this research"
+  },
+  "process_record": {
+    "sources_checked": [], "comparisons": [], "decisions": [],
+    "uncertainties": ["All example data is illustrative and not evidence"],
+    "improvements": []
+  }
+}
