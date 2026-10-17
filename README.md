@@ -12,7 +12,7 @@
 **Learn how to find. Find the field. Resolve the action. Test reality. Prepare the executor.**
 </div>
 
-Meet **Loom**, the little investigator with a magnifying glass. Its success pose appears only after a source-derived installation is actually verified.
+Meet **Loom**, the little investigator with a magnifying glass. Loom is the recognizable face of Research to Action.
 
 Research to Action is a **five-pillar, domain-general research skill** that turns rigorous investigation into a specific downstream execution mission. The research skill produces a reproducible discovery method, broad field map, per-target operational dossiers, independent corroboration and a time-budgeted agent handoff. It researches real execution machinery and interfaces, beyond merely suggesting more research. It also preserves uncertainty, approval boundaries and proof of success.
 
@@ -51,13 +51,18 @@ git clone https://github.com/ryanraposo/r2a.git ~/.hermes/skills/research-to-act
 # Or clone to ~/.agents/skills/research-to-action for portable agents.
 ```
 
-The direct skill has a standard frontmatter contract, references, schema, audit CLI, and tests. Complete Hermes-first transactional installation, rollback, verified receipts and release artifacts are available by deriving the maintained child from the upstream template as described below.
+The standalone skill includes its own frontmatter, research references, schema, dossier CLI, examples and tests. The research lifecycle, evidence standards and executor handoff are defined directly in this repository.
 
-## Source-derived installation
+## Repository layout
 
-This repository is the canonical standalone Research to Action agent skill. The `scripts/apply-to-template.py` overlay is also provided for building a full maintained repository from a **fresh, reviewed** copy of [ryanraposo/skill-template](https://github.com/ryanraposo/skill-template). The upstream template retains authority over its Hermes-first packaging, `skill-uxctl.py`, transactional installation, dry-runs, backups, recovery and release verification. See `DERIVE.md` to materialize and test it; an overlay alone is not a verified installation or published release.
+- `SKILL.md` — canonical methodology, research stages, evidence standards and deliverables.
+- `references/` — detailed research, evidence, coverage and executor-handoff procedures.
+- `schemas/` and `templates/` — structured dossier and mission examples.
+- `scripts/r2actl.py` — portable dossier validation, readiness auditing and handoff generation.
+- `agents/` and `runtimes/` — integration metadata for skill-capable agents.
+- `AGENTS.md` and `tests/` — maintenance guidance and verification.
 
-The canonical skill is `SKILL.md`; the methodology, evidence policy, CLI and schema have matching references and tests. Read `AGENTS.md` for repo-facing guidance, `references/` for field practice, and `templates/` for output contracts.
+Research to Action is maintained and used directly from [ryanraposo/r2a](https://github.com/ryanraposo/r2a). The research procedures are portable across agents; runtime permissions and tool availability are established in the invoking environment.
 
 ## Development and verification
 
@@ -67,6 +72,6 @@ python3 scripts/r2actl.py validate --input templates/brief.json
 python3 scripts/r2actl.py audit --input templates/brief.json
 ```
 
-The starter is intentionally incomplete: an audit indicates further research is needed. See `AGENTS.md` and `DERIVE.md` for the source-derived maintained installation.
+The starter dossier is intentionally incomplete: its audit indicates further research is needed. See `AGENTS.md` for maintenance and verification guidance.
 
-**Canonical repository:** [ryanraposo/r2a](https://github.com/ryanraposo/r2a) · **Version:** 0.2.0 · **Upstream infrastructure:** [ryanraposo/skill-template](https://github.com/ryanraposo/skill-template).
+**Canonical repository:** [ryanraposo/r2a](https://github.com/ryanraposo/r2a) · **Version:** 0.2.0.
